@@ -5,12 +5,14 @@
 #include "pico/cyw43_arch.h"
 #include "display.h"
 #include "button.h"
+#include "lwipopts.h"
 
 #define LED_PIN 7
 #define BUTTON_PIN 10
 #define OLED_PIN 4
 #define BUZZER_PIN 20
 
+//Edit these parameters to fit your local network
 char ssid[] = "Network Name";
 char pass[] = "Password";
 

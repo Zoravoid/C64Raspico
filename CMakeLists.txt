@@ -39,8 +39,8 @@ pico_sdk_init()
 
 add_executable(C64Raspico C64Raspico.cpp )
 
-pico_set_program_name(C64Raspico "C64Raspico")
-pico_set_program_version(C64Raspico "0.1")
+pico_set_program_name(C64Raspico 1)
+pico_set_program_version(C64Raspico 1)
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(C64Raspico 1)
