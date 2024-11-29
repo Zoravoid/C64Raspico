@@ -22,10 +22,8 @@ int main()
 {
     studio_init_all(); 
     display oled;
-    Button input_a(10);
-    const unit32_t debounce_time = 50;
-
     Button button(BUTTON_PIN, debounce_time, true, true, true);
+    const unit32_t debounce_time = 50;
 
     oled.clear();
     oled._printf("Initializing WiFi...\n");
