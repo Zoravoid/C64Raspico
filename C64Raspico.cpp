@@ -22,6 +22,7 @@ int main()
     studio_init_all(); 
     display oled;
     Button input_a(10);
+    Alarm();
 }
 
 class wifi
@@ -29,21 +30,22 @@ class wifi
 
 };
 
-class alarm
+
+void Alarm()
 {
-    void Alarm()
+    gpio_init(LED_PIN, BUZZER_PIN);
+    gpio_set_dir(LED_PIN, BUZZER_PIN, GPIO_OUT)
+    while(true)
     {
-        while(true)
-        {
-        gpio_put(LED_PIN, 1); 
-        gpio_put(BUZZER_PIN, 1);
-        sleep(50);
-        gpio_put(LED_PIN, 0);
-        gpio_put(BUZZER_PIN, 0);
-        sleep(50);
-        }  
-    }
-};
+    gpio_put(LED_PIN, 1); 
+    gpio_put(BUZZER_PIN, 1);
+    sleep(50);
+    gpio_put(LED_PIN, 0);
+    gpio_put(BUZZER_PIN, 0);
+    sleep(50);
+    }  
+}
+
 
 void Clean()
 {
@@ -60,7 +62,7 @@ void Clean()
 
 void Sleep()
 {
-    alarm;
+    Alarm();
     gpio_init(OLED_PIN);
     gpio_set_dir(OLED_PIN, GPIO_OUT);
     for(int i = 0; i < 3; i++)
@@ -87,7 +89,7 @@ void Overtime()
 
 void Changestate()
 {
-    alarm;
+    Alarm();
     gpio_init(OLED_PIN);
     gpio_set_dir(OLED_PIN, GPIO_OUT);
     while(true)
