@@ -37,7 +37,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(C64Raspico C64Raspico.cpp )
+add_executable(C64Raspico C64Raspico.cpp)
 
 pico_set_program_name(C64Raspico 1)
 pico_set_program_version(C64Raspico 1)
@@ -56,12 +56,17 @@ target_include_directories(C64Raspico PRIVATE
 )
 
 # Add any user requested libraries
-target_link_libraries(C64Raspico 
-        
-        )
+target_link_libraries(C64Raspico pico_stdlib)
 
 pico_add_extra_outputs(C64Raspico)
 
 target_include_directories(C64Raspico PRIVATE ${CMAKE_CURRENT_LIST_DIR})
-target_link_libraries(C64Raspico pico_cyw43_arch_lwip_treadsafe_background pico_stdlib)
+target_link_libraries
+(
+    C64Raspico 
+    pico_cyw43_arch_lwip_treadsafe_background 
+    pico_stdlib 
+    hardware_pwm 
+    hardware_i2C
+)
 

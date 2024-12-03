@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
+#include "hardware/i2c.h"
 #include "ssd1306_font.h"
 
 // Define the size of the display we have attached. This can vary, make sure you
