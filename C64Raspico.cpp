@@ -16,35 +16,35 @@
 //still need to fix CYW43_ARCH for wifi to work
 char ssid[] = "Network Name";
 char pass[] = "Password";
-char request = (char *)p->payload;
+char request = (char *)p->payload; //error
 
 int main() 
 {
-    studio_init_all(); 
+    studio_init_all(); //error
     display oled;
-    Button button(BUTTON_PIN, debounce_time, true, true, true);
-    const unit32_t debounce_time = 50;
+    Button button(BUTTON_PIN, debounce_time, true, true, true); //error
+    const unit32_t debounce_time = 50; //error
 
     oled.clear();
-    oled._printf("Initializing WiFi...\n");
+    oled._printf("Initializing WiFi...\n"); //error
     if(cyw43_arch_init())
     {
         oled.render();
-        oled._printf("Failed to initialize CYW43!\n");
+        oled._printf("Failed to initialize CYW43!\n"); //error
         return -1;
     }
     
     oled.render();
-    oled._printf("Connecting to Network:\n", ssid);
+    oled._printf("Connecting to Network:\n", ssid); //error
     if(cyw43_arch_wifi_connect_blocking(ssid, pass, CYW43_AUTH_WPA2_MIXED_PSK))
     {
         oled.render();
-        oled._printf("Failed to connect to Wifi!\n");
+        oled._printf("Failed to connect to Wifi!\n"); //error
         return -1;
     }
 
     oled.render();
-    oled._printf("Connected to WiFi!\n");
+    oled._printf("Connected to WiFi!\n"); //error
 
     while(true)
     {
@@ -61,16 +61,16 @@ int main()
         //Add corect http request
         switch(request)
         {
-            case "Clean request":
+            case "Clean request": //error
                 Clean();
                 break;
-            case "Sleep request":
+            case "Sleep request": //error
                 Sleep();
                 break;
-            case "Overtime request":
+            case "Overtime request": //error
                 Overtime();
                 break;
-            case "Changestate request":
+            case "Changestate request": //error
                 Changestate();
                 break;
         }
@@ -88,9 +88,9 @@ class wifi
 
 void Alarm()
 {
-    gpio_init(LED_PIN, BUZZER_PIN);
-    gpio_set_dir(LED_PIN, BUZZER_PIN, GPIO_OUT)
-    while(true)
+    gpio_init(LED_PIN, BUZZER_PIN); //error
+    gpio_set_dir(LED_PIN, BUZZER_PIN, GPIO_OUT) //error
+    while(true) //error
     {
     gpio_put(LED_PIN, 1); 
     gpio_put(BUZZER_PIN, 1);
@@ -106,7 +106,7 @@ void Clean()
 {
     for(int i = 0; i < 10; i++)
     {
-        oled._pfrintf("Ready for Cleanup!");
+        oled._pfrintf("Ready for Cleanup!"); //error
         sleep_ms(100);
         oled.clear(false);
         sleep_ms(100);
@@ -118,7 +118,7 @@ void Sleep()
     Alarm();
     for(int i = 0; i < 3; i++)
     {
-        oled._pfrintf("Good Night!");
+        oled._pfrintf("Good Night!"); //error
         sleep_ms(100);
         oled.clear(false);
         sleep_ms(100);
@@ -129,7 +129,7 @@ void Overtime()
 {
     for(int i = 0; i < 3; i++)
     {
-        oled._pfrintf("Overtime Enabled!");
+        oled._pfrintf("Overtime Enabled!"); //error
         sleep_ms(100);
         oled.clear(false);
         sleep_ms(100);
@@ -141,7 +141,7 @@ void Changestate()
     Alarm();
     for(int i = 0; i < 10; i++)
     {
-        oled._pfrintf("Change Height!");
+        oled._pfrintf("Change Height!"); //error
         sleep_ms(100);
         oled.clear(false);
         sleep_ms(100);

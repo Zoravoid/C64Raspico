@@ -67,7 +67,9 @@ struct render_area_t {
     int buflen;
 };
 
-
+/**
+ *@brief Class for handling i2c display
+ */
 class display
 {
 private:
@@ -81,10 +83,55 @@ private:
 public:
     display(/* args */);
     ~display();
+    /**
+     * @brief Renders current buffer on display
+     */
     void render();
+    /**
+     * @brief clears display buffer
+     * @param immediate if true renders cleared display buffer immediately
+     */
     void clear(bool immediate=true);
+    /**
+     * @brief fills display buffer
+     * @param immediate if true renders filled display buffer immediately
+     */
     void fill(bool immediate=true);
+    /**
+     * @brief Writes character at specified location
+     * @param x x coordinate to write char at
+     * @param y y coordinate to write char at
+     * @param ch character to write
+     * @param immediate render character immediately
+     */
     void WriteChar(int16_t x, int16_t y, uint8_t ch, bool immediate=true);
+    /**
+     * @brief Writes string at specified location
+     * @param x x coordinate to write char at
+     * @param y y coordinate to write char at
+     * @param str string to write
+     * @param immediate render string immediately
+     */
     void WriteString(int16_t x, int16_t y, char *str, bool immediate=true);
+    /**
+     * @brief Prints to selected line on display
+     * @param line_nr line number between 0 and 7
+     * @param immediate render printed line immediately
+     * @param format string format like regular printf
+     */
     void _printf(uint line_nr, bool immediate, const char* format, ...);
+};
+
+/**
+ * @brief subclass to pring motor info in one function
+ */
+class Motor_display : public display
+{
+public:
+/**
+ * @brief prints motor information
+ * @param dir direction motor is driving
+ * @param speed speed of motor
+ */
+    void print_motor(bool dir, float speed);
 };

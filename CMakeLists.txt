@@ -29,8 +29,8 @@ set(PICO_BOARD pico_w CACHE STRING "Board type")
 include(pico_sdk_import.cmake)
 
 project(C64Raspico C CXX ASM)
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_C_STANDARD 11)   #
+set(CMAKE_CXX_STANDARD 17) #
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
@@ -39,12 +39,12 @@ pico_sdk_init()
 
 add_executable(C64Raspico C64Raspico.cpp)
 
-pico_set_program_name(C64Raspico 1)
-pico_set_program_version(C64Raspico 1)
+pico_set_program_name(C64Raspico "C64Raspico")
+pico_set_program_version(C64Raspico "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(C64Raspico 1)
-pico_enable_stdio_usb(C64Raspico 1)
+pico_enable_stdio_usb(C64Raspico 0)
 
 # Add the standard library to the build
 target_link_libraries(C64Raspico
@@ -53,7 +53,10 @@ target_link_libraries(C64Raspico
 # Add the standard include files to the build
 target_include_directories(C64Raspico PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}
+  ${CMAKE_CURRENT_LIST_DIR}/..
 )
+
+pico_generate_pio_header(C64Raspico ${CMAKE_CURRENT_LIST_DIR}/ws2812.pio)
 
 # Add any user requested libraries
 target_link_libraries(C64Raspico pico_stdlib)
